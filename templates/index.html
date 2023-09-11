@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Portal</title>
+    <style>
+        .input-container {
+            display: flex; 
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Leave Form</h1>
+    <p>Please enter your information:</p>
+    <form  action="{{ url_for("home")}}" method="post" > 
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter Name here...">
+        <br>
+        <br>
+        <label for="Reg">Reg No</label>
+        <input type="text" id="Reg" name="Reg" placeholder="Enter Reg No here...">
+        <br>
+        <br>
+        <label for="Room">Room No:</label>
+        <input type="text" id="Room" name="Room" placeholder="Enter Room No here...">
+        <br>
+        <br>
+        
+        <div class="input-container">
+            <label for="From">From</label>
+            <input type="text" id="From" name="From" placeholder="Enter From Date">
+            <label for="TO">To</label>
+            <input type="text" id="TO" name="TO" placeholder="Enter TO Date">
+        </div>
+        <br>
+        <label for="Reason">Reason</label>
+        <input type="text" id="Reason" name="Reason" placeholder="Enter Reason  here...">
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+
+</html>
+
