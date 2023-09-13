@@ -1,0 +1,18 @@
+<!-- templates/display_data.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data from MongoDB</title>
+</head>
+<body>
+    <h1>Data from MongoDB</h1>
+    <ul>
+        {% for document in data %}
+            <li>
+                <strong>Name:</strong> {{ document.Name }}<br>
+                <strong>Reason:</strong> {{ document.Reason}}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

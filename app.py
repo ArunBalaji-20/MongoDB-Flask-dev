@@ -1,6 +1,8 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,render_template_string,jsonify
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
+from bson import json_util, ObjectId
+import json
 
 app= Flask(__name__)
 
@@ -14,10 +16,7 @@ collection=db['Leave_apply']
 @app.route('/',methods=['GET','POST'])
 def home():
     if request.method=='GET':
-        documents = collection.find()
-        for record in documents:
-            print(record)
-        return render_template('index.html')
+      return render_template('index.html')
     else:
         fname=(request.form.get('name'))
         reg_no=request.form.get('Reg')
@@ -48,6 +47,17 @@ def home():
 def admin():
     data=collection.find()
     return render_template('admin.html',data=data)
+@app.route('/adminlist')
+def adminlist():
+    cursor=collection.find({},{"Name": 1,"Register Number":1,"Room Number":1,"From":1,"To":1,"Reason":1})
+
+    print(cursor)
+    data = [document for document in cursor]
+    #print(data)
+    #return json.loads(json_util.dumps(data))
+    #return jsonify(data)
+    page_sanitized = json.loads(json_util.dumps(data))
+    return page_sanitized
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',debug=True)
