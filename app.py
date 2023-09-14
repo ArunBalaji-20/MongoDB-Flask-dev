@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,render_template_string,jsonify
+from flask import Flask,render_template,request,render_template_string,jsonify,redirect
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from bson import json_util, ObjectId
@@ -19,11 +19,12 @@ def home():
       return render_template('index.html')
     else:
         fname=(request.form.get('name'))
-        reg_no=request.form.get('Reg')
+        reg_no=int(request.form.get('Reg'))
         room=request.form.get('Room')
         From=request.form.get('From')
         To=request.form.get('TO')
         reason=request.form.get('Reason')
+        submitted='submitted'
 
         data={
             'Name':fname,
@@ -31,7 +32,8 @@ def home():
             'Room Number': room,
             'From':From,
             'To':To,
-            'Reason':reason
+            'Reason':reason,
+            'status':submitted
         }
         #name,Reg,Room,From,To,Reason
         
@@ -45,7 +47,7 @@ def home():
 
 @app.route('/admin')
 def admin():
-    data=collection.find()
+    data=list(collection.find())
     return render_template('admin.html',data=data)
 @app.route('/adminlist')
 def adminlist():
@@ -58,6 +60,18 @@ def adminlist():
     #return jsonify(data)
     page_sanitized = json.loads(json_util.dumps(data))
     return page_sanitized
+
+
+@app.route('/checkStatus',methods=['POST','GET'])
+def checkStatus():
+    if request.method=='POST':
+        id=int(request.form.get('id'))
+        print(id)
+        fdata=collection.find_one({"Register Number":id},{"_id":0})
+        print(fdata)
+        return render_template('search.html',data=fdata)
+    else:   
+        return render_template('check.html')
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',debug=True)

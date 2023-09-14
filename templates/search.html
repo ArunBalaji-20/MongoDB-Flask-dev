@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <h1>Data from MongoDB</h1>
+    <h1>your leave status</h1>
     <table>
         <thead>
             <tr>
@@ -34,19 +34,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for document in data %}
+         
                 <tr>
-                    <td>{{ document.Name|safe }}</td>
-                    <td>{{ document['Register Number'] }}</td>
-                    <td>{{ document.From }}</td>
-                    <td>{{ document.To }}</td>
-                    <td>{{ document.Reason|safe }}</td>
-                    <td>
-                        <span><button>Approve</button></span>
-                        <span><button>Reject</button></span>
-                    </td>
+                    <td>{{ data.Name|safe }}</td>
+                    <td>{{ data['Register Number'] }}</td>
+                    <td>{{ data.From }}</td>
+                    <td>{{ data.To }}</td>
+                    <td>{{ data.Reason|safe }}</td>
+                    <td>{{ data.status }}</td>
                 </tr>
-            {% endfor %}
+        
         </tbody>
     </table>
 </body>
