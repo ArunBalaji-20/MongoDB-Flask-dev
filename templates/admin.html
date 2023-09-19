@@ -42,8 +42,8 @@
                     <td>{{ document.To }}</td>
                     <td>{{ document.Reason|safe }}</td>
                     <td>
-                        <span><button>Approve</button></span>
-                        <span><button>Reject</button></span>
+                        <span><button><a href="http://127.0.0.1:5000/approve?register_number={{ document['Register Number'] }}">Approve</a></button></span>
+                        <span><button><a href="http://127.0.0.1:5000/reject?register_number={{ document['Register Number'] }}">Reject</a></button></span>
                     </td>
                 </tr>
             {% endfor %}

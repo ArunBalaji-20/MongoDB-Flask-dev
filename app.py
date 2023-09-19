@@ -73,5 +73,19 @@ def checkStatus():
     else:   
         return render_template('check.html')
 
+@app.route('/approve')
+def approve():
+    a=int(request.args.get('register_number'))
+    cdata=collection.update_one({"Register Number":a}, {"$set": {"status":'Approved'}})
+   
+    return render_template_string('leave approved successfully')
+
+@app.route('/reject')
+def reject():
+    a=int(request.args.get('register_number'))
+    cdata=collection.update_one({"Register Number":a}, {"$set": {"status":'Rejected'}})
+   
+    return render_template_string('Leave Rejected successfully')
+
 if __name__=="__main__":
     app.run(host='0.0.0.0',debug=True)
