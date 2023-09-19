@@ -13,7 +13,11 @@ client=MongoClient('mongodb://localhost:27017/')
 
 db=client['Hostel']
 collection=db['Leave_apply']
-@app.route('/',methods=['GET','POST'])
+@app.route('/')
+def homepage():
+    return render_template('home.html')
+    
+@app.route('/leave',methods=['GET','POST'])
 def home():
     if request.method=='GET':
       return render_template('index.html')
