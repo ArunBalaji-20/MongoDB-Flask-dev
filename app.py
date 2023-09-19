@@ -66,9 +66,9 @@ def adminlist():
 def checkStatus():
     if request.method=='POST':
         id=int(request.form.get('id'))
-        print(id)
+        # print(id)
         fdata=collection.find_one({"Register Number":id},{"_id":0})
-        print(fdata)
+        #print(fdata)
         return render_template('search.html',data=fdata)
     else:   
         return render_template('check.html')

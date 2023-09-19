@@ -41,13 +41,62 @@
                     <td>{{ document.From }}</td>
                     <td>{{ document.To }}</td>
                     <td>{{ document.Reason|safe }}</td>
-                    <td>
-                        <span><button><a href="http://127.0.0.1:5000/approve?register_number={{ document['Register Number'] }}">Approve</a></button></span>
-                        <span><button><a href="http://127.0.0.1:5000/reject?register_number={{ document['Register Number'] }}">Reject</a></button></span>
-                    </td>
+                        <td>
+                            <span><button id="approval{{ document['Register Number'] }}" onclick="approve('{{ document['Register Number'] }}')">Approve</button></span>
+                            <span><button id="reject" onclick="reject('{{ document['Register Number'] }}')">Reject</button></span>
+                        </td>
+                        
+                    
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 </body>
+<script>
+    function approve(registerNumber){
+        const approveUrl = `http://127.0.0.1:5000/approve?register_number=${registerNumber}`;
+        fetch(approveUrl, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json' 
+            }
+        })
+        .then(response => {
+            if (response.status === 200) {
+             
+                alert(`leave Approved for : ${registerNumber}`);
+            } else {
+                
+                alert('Failed to approve.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function reject(registerNumber) {
+        
+        const rejectUrl = `http://127.0.0.1:5000/reject?register_number=${registerNumber}`;
+        fetch(rejectUrl, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json' 
+            }
+        })
+        .then(response => {
+            if (response.status === 200) {
+               
+                alert(`Rejected Register Number: ${registerNumber}`);
+            } else {
+           
+                alert('Failed to reject.');
+            }
+        })
+        .catch(error => {
+     
+            console.error('Error:', error);
+        });
+    }
+</script>
 </html>
