@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hostel Leave portal</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style-home.css') }}">
 </head>
 <body>
-    <a href="http://127.0.0.1:5000/leave">To apply leave click here</a>
-    <br>
-    <br>
-    <a href="http://127.0.0.1:5000/checkStatus">To check leave status click here</a>
-    <br>
-    <br>
-    <a href="http://127.0.0.1:5000/admin">Admin only</a>
+    <div class="box">
+        <h1>Hostel Leave portal</h1>
+        <button onclick="window.location='http://127.0.0.1:5000/leave';" >Apply leave</button>
+        <br>
+        <br>
+        <button onclick="window.location='http://127.0.0.1:5000/checkStatus';" >Check Status</button>
+        <br>
+        <br>
+        <button onclick="window.location='http://127.0.0.1:5000/admin';" >Admin</button>
+    </div>
 
 </body>
 </html>

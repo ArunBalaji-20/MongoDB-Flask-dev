@@ -2,27 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data from MongoDB</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>admin</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style-admin.css') }}">
 </head>
 <body>
-    <h1>Data from MongoDB</h1>
-    <table>
+    <!-- <div class="title"><h1>Data from MongoDB</h1></div> -->
+    <div class="title">
+        <h1>Admin Panel</h1>
+    </div>
+    <div class="table"><table>
         <thead>
             <tr>
                 <th>Name</th>
@@ -42,15 +30,15 @@
                     <td>{{ document.To }}</td>
                     <td>{{ document.Reason|safe }}</td>
                         <td>
-                            <span><button id="approval{{ document['Register Number'] }}" onclick="approve('{{ document['Register Number'] }}')">Approve</button></span>
-                            <span><button id="reject" onclick="reject('{{ document['Register Number'] }}')">Reject</button></span>
+                            <span><button class="b1" id="approval{{ document['Register Number'] }}" onclick="approve('{{ document['Register Number'] }}')">Approve</button></span><br>
+                            <span><button class="b2" id="reject" onclick="reject('{{ document['Register Number'] }}')">Reject</button></span>
                         </td>
                         
                     
                 </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table></div>
 </body>
 <script>
     function approve(registerNumber){
