@@ -22,21 +22,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for document in data %}
+           
                 <tr>
-                    <td>{{ document.Name|safe }}</td>
-                    <td>{{ document['Register Number'] }}</td>
-                    <td>{{ document.From }}</td>
-                    <td>{{ document.To }}</td>
-                    <td>{{ document.Reason|safe }}</td>
+                    <td>{{ data.Name|safe }}</td>
+                    <td>{{ data['Register Number'] }}</td>
+                    <td>{{ data.From }}</td>
+                    <td>{{ data.To }}</td>
+                    <td>{{ data.Reason|safe }}</td>
                         <td>
-                            <span><button class="b1" id="approval{{ document['Register Number'] }}" onclick="approve('{{ document['Register Number'] }}')">Approve</button></span><br>
-                            <span><button class="b2" id="reject" onclick="reject('{{ document['Register Number'] }}')">Reject</button></span>
+                            <span><button class="b1" id="approval{{ data['Register Number'] }}" onclick="approve('{{ data['Register Number'] }}')">Approve</button></span><br>
+                            <span><button class="b2" id="reject" onclick="reject('{{ data['Register Number'] }}')">Reject</button></span>
                         </td>
                         
                     
                 </tr>
-            {% endfor %}
         </tbody>
     </table></div>
 </body>
@@ -51,8 +50,12 @@
         })
         .then(response => {
             if (response.status === 200) {
-             
+               
                 alert(`leave Approved for : ${registerNumber}`);
+                const bt=document.getElementById("approval{{ data['Register Number']}}");
+                const rbt=document.getElementById("reject");
+                bt.style.display='none';
+                rbt.style.display='none';
             } else {
                 
                 alert('Failed to approve.');
@@ -76,6 +79,10 @@
             if (response.status === 200) {
                
                 alert(`Rejected Register Number: ${registerNumber}`);
+                const bt=document.getElementById("approval{{ data['Register Number']}}");
+                const rbt=document.getElementById("reject");
+                bt.style.display='none';
+                rbt.style.display='none';
             } else {
            
                 alert('Failed to reject.');

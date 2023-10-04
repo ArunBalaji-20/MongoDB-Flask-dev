@@ -53,6 +53,18 @@ def home():
 def admin():
     data=list(collection.find())
     return render_template('admin.html',data=data)
+
+@app.route('/adminview')
+def view():
+    data=list(collection.find())
+    return render_template('adminview.html',data=data)
+
+@app.route('/student')
+def leave():
+    reg=int(request.args.get('ID'))
+    data=collection.find_one({"Register Number":reg},{"_id":0})
+    return render_template('admin.html',data=data)
+
 @app.route('/adminlist')
 def adminlist():
     cursor=collection.find({},{"Name": 1,"Register Number":1,"Room Number":1,"From":1,"To":1,"Reason":1})
